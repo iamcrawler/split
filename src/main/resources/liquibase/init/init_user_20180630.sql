@@ -1,0 +1,1 @@
+INSERT  INTO ll_user VALUES (1,'ll_admin','ll_admin','iamcrawler@sina.com',12345);

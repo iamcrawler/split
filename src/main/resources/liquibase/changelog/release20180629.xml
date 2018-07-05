@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017. Shanghai Zhenhui Information Technology Co,. ltd.
+  ~ All rights are reserved.
+  -->
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="autoIncrement" value="true" dbms="mysql,h2,postgresql,oracle"/>
+    
+    <changeSet id="201806291018" author="liang.liu">
+        <createTable tableName="ll_user" remarks="用户表">
+            <column name="id" type="bigint" remarks="id">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_name" type="varchar(50)" remarks="用户名称"/>
+            <column name="password" type="varchar(100)" remarks="密码"/>
+            <column name="mail" type="varchar(30)" remarks="用户邮箱"/>
+            <column name="phone" type="int" remarks="联系电话"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="201806301149" author="crawler">
+        <sqlFile path="classpath:liquibase\init\init_user_20180630.sql" encoding="UTF-8"/>
+    </changeSet>
+
+    <changeSet id="201807041817" author="liang.liu">
+        <createTable tableName="ll_role">
+            <column name="id" type="bigint" remarks="id">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="role_name" type="varchar(30)" remarks="角色名称"/>
+        </createTable>
+        <sqlFile path="classpath:liquibase/init/init_role_20180704.sql" encoding="UTF-8"/>
+    </changeSet>
+    <changeSet id="201807042057" author="liang.liu">
+        <createTable tableName="ll_user_role">
+            <column name="id" type="bigint" encoding="用户_角色关系表id">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="bigint" remarks="用户id">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="bigint" remarks="角色id">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <sqlFile path="classpath:liquibase/init/init_role_2018070401.sql" encoding="UTF-8"/>
+    </changeSet>
+    
+    
+</databaseChangeLog>
